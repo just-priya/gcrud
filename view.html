@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center {
+            max-width: 600px;
+            margin: 0px auto;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            /* line-height: 20px;
+            word-spacing: 3px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <label for="canEdit"><input type="checkbox" name="canEdit" id="canEdit" onchange="toggleInput(event)">edit</label>
+        <input id="fontSize" disabled="true" type="range" min="12" max="40" value="18" oninput="changeFontSize(event)" >
+        <div>
+            <a href="/">home</a>
+        </div>
+        <h1>{{.Title}}</h1>
+    <div id="body" style="white-space: pre-wrap;">
+        {{.Body}}
+    </div>
+    </div>
+    <script>
+        const fontSize = document.querySelector("input#fontSize");
+        const canEdit = document.querySelector("input#canEdit[type=checkbox]");
+        const body = document.querySelector("div#body");
+        const toggleInput = (e) => {
+            if (canEdit.checked) {
+                fontSize.removeAttribute("disabled")
+            } else {
+                fontSize.setAttribute("disabled", true)
+            }
+        }
+        const changeFontSize = (e) => {
+            if (canEdit.checked) {
+                body.style.fontSize = `${e.target.value}px`
+            }
+        }
+    </script>
+</body>
+
+</html>
